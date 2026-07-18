@@ -33,14 +33,15 @@ All five are coded reference cells (state machines unit-tested; `.solve()` raise
 **app_resolve** (dan — resolve → tier + synthetic-input stance + karakuri route) · **intent_plan**
 (naphtali — brief → prohibition-scan → gated DesktopOps; NL leg is R1 Murakumo, G4) ·
 **pairing_broker** (gad — member-keyless device pairing; outward held at Council gate even with
-member-sig) · **actuate_invoke** (asher — wires desktop.py + t2_vision.py into
+member-sig) · **actuate_invoke** (asher — wires the Clojure desktop + T2 vision methods into
 stance-gate→mutate-gate→dry-run) · **evidence_audit** (joseph — sha256-only evidence + Datom
 projection, G7/G9).
 
-Methods layer: `desktop.py` (DesktopOp parser/planner) · `t2_vision.py` (vision-pointer T2 plan
-builder — surveillance + evasion verbs structurally unrepresentable) · `actuate_live.py` (the
+Methods layer: `src/tedai/methods/desktop.cljc` (DesktopOp parser/planner) ·
+`src/tedai/methods/t2_vision.cljc` (vision-pointer T2 plan builder — surveillance + evasion
+verbs structurally unrepresentable) · `src/tedai/methods/actuate_live.cljc` (the
 single live-actuation membrane — refuses unless env flag + operator + Council Lv6+ + member-sig,
-and raises `NotImplementedError` at R0 even then, G6/G3) · `datom.py` (kotoba Datom audit
+and refuses at R0 even then, G6/G3) · `src/tedai/methods/datom.cljc` (kotoba Datom audit
 projector; raw frames refused, G7/G9).
 
 ## Gates (immutable R0→R3)
@@ -71,12 +72,8 @@ prohibited-content driving (Charter-Rider §2) · N7 not a browser-automation to
 ## Build / test
 
 ```
-cd methods && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest   # desktop/t2_vision/actuate_live/datom (79 tests)
-cd cells   && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest   # all five coded cells (34 tests)
-python3 methods/desktop.py tedai finder files.list                 # T1 scripting-API dry-run plan
-python3 methods/desktop.py tedai anticheat-game inventory.list     # stance-prohibited → T3 only
-python3 methods/desktop.py tedai chrome tabs.list                  # N7 → route-to-karakuri
-python3 methods/t2_vision.py tedai legacy-win-app records.list     # T2 vision-pointer dry-run plan
+bb test
+clojure -M:test
 ```
 
 R0 = design + DesktopOp parser/planner + pairing_broker state-machine + `:representative` app

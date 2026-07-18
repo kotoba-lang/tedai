@@ -14,3 +14,7 @@ gate even with a member signature (G5) Â· no-surveillance, never bossware (G8) Â
 
 See `CLAUDE.md` for the full gate/non-goal table and build/test commands, `manifest.edn` for the
 machine-readable manifest, and ADR-2606101400 for the decision record.
+
+Canonical contracts are EDN: `manifest.edn`, `schema/schema.edn`, `cells/*.edn`, and
+`lex/*.edn`. Runtime code lives under `src/tedai`; tests live under `test/tedai`.
+Run the standalone suite with `bb test`.
