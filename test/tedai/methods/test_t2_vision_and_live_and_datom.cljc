@@ -7,7 +7,7 @@
   the same vocabularies. Python typed `pytest.raises(X)` is mirrored by catching the
   ex-info and asserting its kind via the module predicate."
   (:require [clojure.test :refer [deftest is]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [tedai.methods.desktop :as desktop]
             [tedai.methods.t2-vision :as t2]
             [tedai.methods.actuate-live :as live]

@@ -18,7 +18,7 @@
   a Council activation ADR. This module proves the *refusal chain*, not execution.
 
   No clock reads; no network. Host env access is behind `#?(:clj ...)`."
-  (:require [tedai.methods.desktop :as desktop]))
+  (:require [kotoba.lang.text] [tedai.methods.desktop :as desktop]))
 
 (def LIVE-ACTUATION-FLAG "TEDAI_ALLOW_LIVE_ACTUATION")
 
@@ -79,7 +79,7 @@
     (when (seq missing)
       (throw (actuation-refused
               (str "G6: live actuation refused; missing authorities: "
-                   (clojure.string/join "; " missing)))))
+                   (kotoba.lang.text/join "; " missing)))))
     (when (and (not (contains? #{desktop/SAFETY-READ} (get op :safety)))
                (= (get op :mutate-gate) desktop/MUTATE-READ-ALLOWED))
       ;; A mutating op whose gate claims read-allowed is a planner-drift bug; never fail open.

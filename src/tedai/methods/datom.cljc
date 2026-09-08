@@ -17,7 +17,7 @@
   `planned-at` is supplied by the caller — this module performs no clock reads, so
   its output is deterministic. Self-contained sha-256 (host I/O behind #?(:clj));
   ':ns/name' kept AS strings; string-keyed maps."
-  (:require [tedai.methods.desktop :as desktop]))
+  (:require [kotoba.lang.text] [tedai.methods.desktop :as desktop]))
 
 (def AUDIT-GRAPH "tedai-audit-v1")
 (def LIVE-INGEST-FLAG "TEDAI_ALLOW_LIVE_INGEST")
@@ -102,7 +102,7 @@
 (defn- args-keys
   "G3: serialize only the flag KEYS (sorted), never values (a value could be a secret/path)."
   [op]
-  (clojure.string/join "," (sort (keys (get op :args)))))
+  (kotoba.lang.text/join "," (sort (keys (get op :args)))))
 
 (defn- require-kw
   "G7: map a gate value to its EDN keyword, REFUSING an unknown value rather than fail-open.
