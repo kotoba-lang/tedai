@@ -4,7 +4,7 @@
   OWN paired device with NO platform-held key; read ops allowed, mutating ops member-signature-gated,
   :outward ops held at the Council outward gate even WITH a member signature.
   G1 member-principal/own-device-only · G3 no-server-key · G5 read-default/mutate-gated/outward-held."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def member "member")
 (def encref-prefix "encref:")

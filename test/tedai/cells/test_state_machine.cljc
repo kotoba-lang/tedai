@@ -3,7 +3,7 @@
   evidence_audit (intent_plan has its own test_state_machine.cljc). 1:1 port of the matching
   portions of cells/test_state_machines.py (ADR-2606101400) + the all-5-cell R0 solve-raise."
   (:require [clojure.test :refer [deftest is]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [tedai.methods.desktop :as desktop]
             [tedai.cells.app-resolve.state-machine :as ar]
             [tedai.cells.pairing-broker.state-machine :as pb]

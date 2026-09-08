@@ -26,7 +26,7 @@
   (`:cell-state`, `:brief`, `:command-lines`, `:next-node`); the Python
   `next_node` string identities (\"prohibition_scan\"/\"emit_plan\"/\"end\") stay
   strings."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 ;; ── prohibition markers (intent-level; G8 surveillance / G2 evasion / N1 / N2) ──
 
@@ -144,7 +144,7 @@
 (defn classify-safety
   "classify_safety — verb → safety. Unknown verbs → :update (conservative)."
   [verb]
-  (get verb-safety (str/lower-case (str/trim (or verb ""))) safety-update))
+  (get verb-safety (str/lower (str/trim (or verb ""))) safety-update))
 
 (defn is-destructive
   "is_destructive — G5: delete is the irreversible class."
@@ -154,7 +154,7 @@
 (defn resolve-app
   "resolve_app — :representative registry lookup; nil → :unknown-app (G8)."
   [app-id]
-  (get app-registry (str/lower-case (str/trim (or app-id "")))))
+  (get app-registry (str/lower (str/trim (or app-id "")))))
 
 (defn t2-stance
   "t2_stance — synthetic-input stance; missing → \"prohibited\" (default-deny, G2)."
@@ -199,13 +199,13 @@
   {:app :noun :verb :args}. Raises (ex-info) on a malformed command (G8)."
   [line]
   (let [tokens (str/split (str/trim (or line "")) #"\s+")
-        tokens (if (and (seq tokens) (= "tedai" (str/lower-case (first tokens))))
+        tokens (if (and (seq tokens) (= "tedai" (str/lower (first tokens))))
                  (vec (rest tokens))
                  (vec tokens))]
     (when (< (count tokens) 2)
       (throw (ex-info (str "malformed command (need '<app> <noun>.<verb>'): " (pr-str line))
                       {:tedai/malformed-command true :line line})))
-    (let [app (str/lower-case (nth tokens 0))
+    (let [app (str/lower (nth tokens 0))
           nv  (nth tokens 1)]
       (when-not (str/includes? nv ".")
         (throw (ex-info (str "malformed op (need '<noun>.<verb>'): " (pr-str nv))
@@ -225,7 +225,7 @@
                       (recur (+ j 2) (assoc args k nxt))
                       (recur (inc j) (assoc args k true))))
                   (recur (inc j) args)))
-              {:app app :noun (str/lower-case noun) :verb (str/lower-case verb) :args args})))))))
+              {:app app :noun (str/lower noun) :verb (str/lower verb) :args args})))))))
 
 (defn plan-op
   "plan / plan_op — parse a command into a dry-run DesktopOp map with every gate
@@ -295,7 +295,7 @@
   or detection-evasion in intent, BEFORE any op is planned."
   [state]
   (let [cs   (make-plan-state (:cell-state state))
-        text (str/lower-case (str/join " " (cons (:brief cs) (:command-lines cs))))
+        text (str/lower (str/join " " (cons (:brief cs) (:command-lines cs))))
         hits (filterv (fn [marker] (str/includes? text marker)) prohibited-intents)]
     (if (seq hits)
       {:cell-state (assoc cs

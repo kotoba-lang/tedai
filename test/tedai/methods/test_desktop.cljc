@@ -4,7 +4,7 @@
   1:1 Clojure port of `20-actors/tedai/methods/test_desktop.py`.
   Stdlib + clojure.test only. Parametrized Python cases are expanded into
   separate `(is ...)` forms."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.lang.text] [clojure.test :refer [deftest is testing]]
             [tedai.methods.desktop :as sut]))
 
 ;; ── parsing (G8: never guesses the shape) ────────────────────────────────────
@@ -84,7 +84,7 @@
   (let [op (sut/plan "tedai anticheat-game inventory.list" :prefer-tier sut/TIER-T2)]
     (is (= (:stance-gate op) sut/STANCE-REFUSED))
     (is (= (:t2-engine op) ""))
-    (is (clojure.string/includes? (:note op) "G2"))))
+    (is (kotoba.lang.text/includes? (:note op) "G2"))))
 
 ;; ── end-to-end plans (G5/G6 invariants) ─────────────────────────────
 
