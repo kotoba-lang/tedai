@@ -72,8 +72,8 @@ prohibited-content driving (Charter-Rider §2) · N7 not a browser-automation to
 ## Build / test
 
 ```
-bb test
-clojure -M:test
+kbb -M:test
+kbb -M:test
 ```
 
 R0 = design + DesktopOp parser/planner + pairing_broker state-machine + `:representative` app
