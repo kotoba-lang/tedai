@@ -37,11 +37,11 @@ member-sig) · **actuate_invoke** (asher — wires the Clojure desktop + T2 visi
 stance-gate→mutate-gate→dry-run) · **evidence_audit** (joseph — sha256-only evidence + Datom
 projection, G7/G9).
 
-Methods layer: `src/tedai/methods/desktop.cljc` (DesktopOp parser/planner) ·
-`src/tedai/methods/t2_vision.cljc` (vision-pointer T2 plan builder — surveillance + evasion
-verbs structurally unrepresentable) · `src/tedai/methods/actuate_live.cljc` (the
+Methods layer: `src/tedai/methods/desktop.cljk` (DesktopOp parser/planner) ·
+`src/tedai/methods/t2_vision.cljk` (vision-pointer T2 plan builder — surveillance + evasion
+verbs structurally unrepresentable) · `src/tedai/methods/actuate_live.cljk` (the
 single live-actuation membrane — refuses unless env flag + operator + Council Lv6+ + member-sig,
-and refuses at R0 even then, G6/G3) · `src/tedai/methods/datom.cljc` (kotoba Datom audit
+and refuses at R0 even then, G6/G3) · `src/tedai/methods/datom.cljk` (kotoba Datom audit
 projector; raw frames refused, G7/G9).
 
 ## Gates (immutable R0→R3)
