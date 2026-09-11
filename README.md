@@ -17,4 +17,4 @@ machine-readable manifest, and ADR-2606101400 for the decision record.
 
 Canonical contracts are EDN: `manifest.edn`, `schema/schema.edn`, `cells/*.edn`, and
 `lex/*.edn`. Runtime code lives under `src/tedai`; tests live under `test/tedai`.
-Run the standalone suite with `bb test`.
+Run the standalone suite with `kbb -M:test`.
