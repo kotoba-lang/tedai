@@ -17,7 +17,7 @@
   Charter-gate invariants exercised here: G6 (dry-run only) + G8/G2 (the
   intent-level prohibition scan refuses bossware/surveillance + detection-evasion
   BEFORE planning — see prohibited-intents)."
-  (:require [clojure.test :refer [deftest is testing run-tests]]
+  (:require [kotoba.test :refer [deftest is testing run-tests]]
             [tedai.cells.intent-plan.state-machine :as sm]))
 
 ;; ── intent_plan (1:1 with the Python _plan_brief helper) ──────────
