@@ -1,4 +1,4 @@
-(require '[clojure.test :as t])
+(require '[kotoba.test :as t])
 
 (def suites
   '[tedai.cells.intent-plan.test-state-machine

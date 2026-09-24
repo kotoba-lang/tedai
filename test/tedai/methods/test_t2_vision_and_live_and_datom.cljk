@@ -6,7 +6,7 @@
   Stdlib + clojure.test only. Parametrized pytest cases are expanded into loops over
   the same vocabularies. Python typed `pytest.raises(X)` is mirrored by catching the
   ex-info and asserting its kind via the module predicate."
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [kotoba.lang.text :as str]
             [tedai.methods.desktop :as desktop]
             [tedai.methods.t2-vision :as t2]
