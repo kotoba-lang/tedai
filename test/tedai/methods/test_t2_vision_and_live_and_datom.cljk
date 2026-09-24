@@ -6,7 +6,7 @@
   Stdlib + clojure.test only. Parametrized pytest cases are expanded into loops over
   the same vocabularies. Python typed `pytest.raises(X)` is mirrored by catching the
   ex-info and asserting its kind via the module predicate."
-  (:require [kotoba.test :refer [deftest is]]
+  (:require [kotoba.bytes :as kbytes] [kotoba.test :refer [deftest is]]
             [kotoba.lang.text :as str]
             [tedai.methods.desktop :as desktop]
             [tedai.methods.t2-vision :as t2]
@@ -185,7 +185,7 @@
 
 (deftest test-raw-frame-refused-hash-accepted
   (let [op (desktop/plan "tedai legacy-win-app records.list")
-        e (caught #(datom/op-entity op PLANNED-AT :raw-frame (.getBytes "PNG..." "UTF-8")))]
+        e (caught #(datom/op-entity op PLANNED-AT :raw-frame (kbytes/utf8-bytes "PNG...")))]
     (is (datom/raw-evidence-refused? e))                      ; G9
     (let [h (datom/evidence-hash "PNG...")
           ent (datom/op-entity op PLANNED-AT :evidence-sha256 h)]
