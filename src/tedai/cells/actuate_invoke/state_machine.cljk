@@ -4,7 +4,7 @@
   mutate-gate → build-adapter-plan → dry-run-emit. Wires desktop + t2_vision into the gated path:
   a T2 op gets a vision plan only when its stance gate is clean (G2); every op stops at dry-run (G6).
   The DesktopOp is the keyword-keyed map returned by desktop/plan."
-  (:require [tedai.methods.desktop :as desktop]
+  (:require [kotoba.lang.error :as kerror] [tedai.methods.desktop :as desktop]
             [tedai.methods.t2-vision :as t2]))
 
 (def outcome-stance-refused "refused-stance")   ; G2
@@ -45,7 +45,7 @@
       (try
         {"cell_state" (assoc cs "phase" "emitted"
                              "payload" (assoc (get cs "payload") "adapterPlan" (t2/build-vision-plan op) "dryRun" true)) "next_node" "end"}
-        (catch clojure.lang.ExceptionInfo e
+        (catch kerror/ExceptionInfo e
           (if (t2/t2-not-eligible? e)
             {"cell_state" (assoc cs "phase" "refused"
                                  "payload" (assoc (get cs "payload") "outcome" outcome-stance-refused "note" (str (ex-message e)))) "next_node" "end"}

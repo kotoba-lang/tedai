@@ -4,7 +4,7 @@
   1:1 Clojure port of `20-actors/tedai/methods/test_desktop.py`.
   Stdlib + clojure.test only. Parametrized Python cases are expanded into
   separate `(is ...)` forms."
-  (:require [kotoba.lang.text] [kotoba.test :refer [deftest is testing]]
+  (:require [kotoba.lang.error :as kerror] [kotoba.lang.text] [kotoba.test :refer [deftest is testing]]
             [tedai.methods.desktop :as sut]))
 
 ;; ── parsing (G8: never guesses the shape) ────────────────────────────────────
@@ -19,12 +19,12 @@
     (is (= args {"to" "friend", "draft" true}))))
 
 (deftest test-parse-malformed-raises
-  (is (thrown? clojure.lang.ExceptionInfo (sut/parse-command "")))
-  (is (thrown? clojure.lang.ExceptionInfo (sut/parse-command "tedai")))
-  (is (thrown? clojure.lang.ExceptionInfo (sut/parse-command "tedai finder")))
-  (is (thrown? clojure.lang.ExceptionInfo (sut/parse-command "tedai finder fileslist")))
-  (is (thrown? clojure.lang.ExceptionInfo (sut/parse-command "tedai finder .list")))
-  (is (thrown? clojure.lang.ExceptionInfo (sut/parse-command "tedai finder files."))))
+  (is (thrown? kerror/ExceptionInfo (sut/parse-command "")))
+  (is (thrown? kerror/ExceptionInfo (sut/parse-command "tedai")))
+  (is (thrown? kerror/ExceptionInfo (sut/parse-command "tedai finder")))
+  (is (thrown? kerror/ExceptionInfo (sut/parse-command "tedai finder fileslist")))
+  (is (thrown? kerror/ExceptionInfo (sut/parse-command "tedai finder .list")))
+  (is (thrown? kerror/ExceptionInfo (sut/parse-command "tedai finder files."))))
 
 ;; ── safety classification incl. the OS-layer :outward class (G5) ─────────────
 
@@ -146,5 +146,5 @@
     (is (= (:note op) sut/ROUTE-KARAKURI))))
 
 (deftest test-unknown-prefer-tier-raises
-  (is (thrown? clojure.lang.ExceptionInfo
+  (is (thrown? kerror/ExceptionInfo
                (sut/plan "tedai finder files.list" :prefer-tier "t9-magic"))))
