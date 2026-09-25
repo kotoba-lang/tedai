@@ -17,7 +17,7 @@
   Charter-gate invariants exercised here: G6 (dry-run only) + G8/G2 (the
   intent-level prohibition scan refuses bossware/surveillance + detection-evasion
   BEFORE planning — see prohibited-intents)."
-  (:require [kotoba.test :refer [deftest is testing run-tests]]
+  (:require [kotoba.lang.error :as kerror] [kotoba.test :refer [deftest is testing run-tests]]
             [tedai.cells.intent-plan.state-machine :as sm]))
 
 ;; ── intent_plan (1:1 with the Python _plan_brief helper) ──────────
@@ -56,14 +56,14 @@
         (is (not (contains? (:payload cs) "ops")))))))
 
 (deftest test-empty-command-lines-raise
-  (is (thrown? clojure.lang.ExceptionInfo
+  (is (thrown? kerror/ExceptionInfo
                (sm/transition-parse-brief {:cell-state {} :brief "x" :command-lines []}))))
 
 ;; ── extra parity guards on the ported gates (not in the Python file) ──
 
 (deftest test-emit-plan-without-clean-scan-raises
   (testing "illegal transition: emit-plan before a clean prohibition scan (G5 guard)"
-    (is (thrown? clojure.lang.ExceptionInfo
+    (is (thrown? kerror/ExceptionInfo
                  (sm/transition-emit-plan {:cell-state {:phase sm/plan-phase-parsed}})))))
 
 (deftest test-outward-op-carries-outward-gate
@@ -74,7 +74,7 @@
 
 (deftest test-closed-plan-state-surface
   (testing "an unexpected cell-state field raises (PlanState(**...) parity)"
-    (is (thrown? clojure.lang.ExceptionInfo
+    (is (thrown? kerror/ExceptionInfo
                  (sm/transition-parse-brief
                   {:cell-state {:bogus 1} :brief "x" :command-lines ["tedai finder files.list"]})))))
 
