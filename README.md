@@ -12,7 +12,7 @@ no-server-key (G3) · a screenshot never leaves the device (G4) · `:outward` op
 gate even with a member signature (G5) · no-surveillance, never bossware (G8) · hash-only evidence
 (G9). Browser surfaces route to **karakuri** (N7).
 
-See `CLAUDE.md` for the full gate/non-goal table and build/test commands, `manifest.edn` for the
+See `AGENTS.md` for the full gate/non-goal table and build/test commands, `manifest.edn` for the
 machine-readable manifest, and ADR-2606101400 for the decision record.
 
 Canonical contracts are EDN: `manifest.edn`, `schema/schema.edn`, `cells/*.edn`, and
